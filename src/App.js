@@ -21,7 +21,6 @@ class App extends Component {
         web3: results.web3,
         account: results.web3.eth.accounts[0]
       })
-      this.instantiateContract();
     })
     .catch(err => {
       console.log('Error finding web3.', err);
