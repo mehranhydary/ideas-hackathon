@@ -4,14 +4,33 @@ import { FormGroup, ControlLabel, FormControl, HelpBlock, Table, Button } from '
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+import getWeb3 from '../lib/getWeb3';
+import TravelEntryFactory from '../../build/contracts/TravelEntryFactory.json';
+
 export default class TravelEntryPage extends Component {
+
     state = {
         location: '',
         entryDate: '',
         exitDate: '',
-        stamped: false
+        stamped: false,
+        web3: '',
+        account: ''
     }
 
+    componentWillMount() {
+        getWeb3
+        .then(results => {
+          this.setState({
+            web3: results.web3,
+            account: results.web3.eth.accounts[0]
+          })
+        })
+        .catch(err => {
+          console.log('Error finding web3.', err);
+        })
+      }
+    
     handleChange = (e) => {
         var change = {};
         change[e.target.name] = e.target.value;
@@ -36,7 +55,25 @@ export default class TravelEntryPage extends Component {
     
     
     onSubmit = (e) => {
-        console.log('submit')
+
+        const contract = require('truffle-contract');
+        const travelEntryFactory = contract(TravelEntryFactory);
+        travelEntryFactory.setProvider(this.state.web3.currentProvider);
+        travelEntryFactory
+        .deployed()
+        .then(travelEntryFactory => {
+            //@MEHRAN - I'm having trouble because the this.state.entryDate._d outputs something like Tue Oct 02 2018 00:00:00 GMT-0400 (Eastern Daylight Time) and solidity doesn't play well with this
+            console.log(this.state.entryDate._d)
+          return travelEntryFactory.createTravelHistory(
+            this.state.location,
+            this.state.entryDate._d,
+            "0x374832aa177d6236c73725790697aeb1f21cdef1bb75536a434c09c0561545c9"
+            ,{
+              from: this.state.account,
+              gas: 500000
+            }
+          )
+        })
     }
     
     render() {
@@ -64,6 +101,8 @@ export default class TravelEntryPage extends Component {
                     selected={this.state.entryDate}
                     onChange={(e) => this.handleEntryChange(e)}
                 />
+                {/* @MEHRAN - I think we are considering leaving out Exit Date from the form as it doesn't make too much sense to add it */}
+                {/* HOWEVER - once they do the stamp button it provides the Exit Date */}
                 <ControlLabel>Exit Date: </ControlLabel>
                 <DatePicker
                     name="exitDate"
@@ -112,3 +151,4 @@ export default class TravelEntryPage extends Component {
         )
     }
 }
+
