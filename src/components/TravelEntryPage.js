@@ -55,25 +55,11 @@ export default class TravelEntryPage extends Component {
     
     
     onSubmit = (e) => {
-
-        const contract = require('truffle-contract');
-        const travelEntryFactory = contract(TravelEntryFactory);
-        travelEntryFactory.setProvider(this.state.web3.currentProvider);
-        travelEntryFactory
-        .deployed()
-        .then(travelEntryFactory => {
-            //@MEHRAN - I'm having trouble because the this.state.entryDate._d outputs something like Tue Oct 02 2018 00:00:00 GMT-0400 (Eastern Daylight Time) and solidity doesn't play well with this
-            console.log(this.state.entryDate._d)
-          return travelEntryFactory.createTravelHistory(
+        e.preventDefault()
+        this.props.createTravelEntryOnBlockchain(
             this.state.location,
-            this.state.entryDate._d,
-            "0x374832aa177d6236c73725790697aeb1f21cdef1bb75536a434c09c0561545c9"
-            ,{
-              from: this.state.account,
-              gas: 500000
-            }
-          )
-        })
+            this.state.entryDate
+        )
     }
     
     render() {
