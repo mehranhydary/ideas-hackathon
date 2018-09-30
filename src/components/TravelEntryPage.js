@@ -87,16 +87,6 @@ export default class TravelEntryPage extends Component {
                     selected={this.state.entryDate}
                     onChange={(e) => this.handleEntryChange(e)}
                 />
-                {/* @MEHRAN - I think we are considering leaving out Exit Date from the form as it doesn't make too much sense to add it */}
-                {/* HOWEVER - once they do the stamp button it provides the Exit Date */}
-                <ControlLabel>Exit Date: </ControlLabel>
-                <DatePicker
-                    name="exitDate"
-                    id="dateInput"
-                    className="form-control"
-                    selected={this.state.exitDate}
-                    onChange={(e) => this.handleExitChange(e)}
-                />
                 <FormControl.Feedback />
                 </FormGroup>
                 <Button onClick={(e) => this.onSubmit(e)} bsStyle="primary">Submit</Button>

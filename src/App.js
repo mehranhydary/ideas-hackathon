@@ -74,6 +74,9 @@ class App extends Component {
         }
       )
     })
+    .then(() => {
+      window.location.replace('http://localhost:3000/summary')
+    })
     .catch(err => console.log(err))
   }
   createTravelEntryOnBlockchain = (
@@ -94,6 +97,9 @@ class App extends Component {
         }
       )
     })
+    .then(() => {
+      window.location.replace('http://localhost:3000/summary')
+    })
   }
   updateTravelEntryOnBlockchain = (
     exitDate
@@ -110,6 +116,9 @@ class App extends Component {
           gas: 500000
         }
       )
+    })
+    .then(() => {
+      window.location.replace('http://localhost:3000/summary')
     })
   }
   /* 
