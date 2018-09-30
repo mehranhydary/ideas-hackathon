@@ -57,30 +57,39 @@ class App extends Component {
       )
     })
   }
-  createPassportOnBlockchain(
-    name,
-    country,
-    passportNumber,
-    birthday,
-    gender,
-    placeOfBirth,
-    issuingAuth
+  createTravelEntryOnBlockchain(
+    location,
+    entryDate
   ) {
     const contract = require('truffle-contract');
-    const passportFactory = contract(PassportFactory);
-    passportFactory.setProvider(this.state.web3.currentProvider);
-    passportFactory
+    const travelEntryFactory = contract(TravelEntryFactory);
+    travelEntryFactory.setProvider(this.state.web3.currentProvider);
+    travelEntryFactory
     .deployed()
-    .then(passportFactory => {
-      return passportFactory.createPassport(
-        name,
-        country,
-        passportNumber,
-        birthday,
-        gender,
-        placeOfBirth,
-        issuingAuth
-        ,
+    .then(travelEntryFactory => {
+      return travelEntryFactory.createTravelHistory(
+        location,
+        entryDate,
+        this.state.account,
+        {
+          from: this.state.account,
+          gas: 500000
+        }
+      )
+    })
+  }
+  updateTravelEntryOnBlockchain(
+    exitDate
+  ) {
+    const contract = require('truffle-contract');
+    const travelEntryFactory = contract(TravelEntryFactory);
+    travelEntryFactory.setProvider(this.state.web3.currentProvider);
+    travelEntryFactory
+    .deployed()
+    .then(travelEntryFactory => {
+      return travelEntryFactory.updateTravelHistory(
+        exitDate,
+        this.state.account,
         {
           from: this.state.account,
           gas: 500000
