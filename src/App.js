@@ -38,7 +38,6 @@ class App extends Component {
         account: results.web3.eth.accounts[0],
         isLoaded: true
       })
-      console.log(this.state.web3, this.state.account)
       passportFactory.setProvider(this.state.web3.currentProvider)
       travelEntryFactory.setProvider(this.state.web3.currentProvider)
     })
@@ -115,40 +114,183 @@ class App extends Component {
   /* 
     Need to figure out how to read directly from react js... 
   */
-  readPassportCreationTransaction = (tx_id) => {
-    if(this.state.web3) {
-      return this.getTransaction(tx_id)
+
+  // readPassportName = () => {
+  //   if(this.state.web3){
+  //   passportFactory.setProvider(this.state.web3.currentProvider)
+  //   passportFactory.deployed()
+  //   .then(passportFactory => {
+  //     return passportFactory.getPassportName(this.state.account)
+  //     .then(result => {
+  //       console.log('blockchain:', this.hex2a(result))
+  //       return this.hex2a(result);
+  //     })
+  //     .catch(err => console.log('Error getting name!'))
+  //   })
+  //   .catch(err => console.log(err))
+  //   } else {
+  //     console.log("Waiting on state to load...")
+  //   }
+  // }
+
+  readPassportName = () => {
+    if(this.state.web3){
+      passportFactory.setProvider(this.state.web3.currentProvider)
+      passportFactory.deployed()
+      .then(passportFactory => {
+        return passportFactory.getPassportName(this.state.account)
+        .then(result=> {
+          console.log('blockchain: ', this.hex2a(result))
+          return this.hex2a(result)
+        })
+        .catch(err => console.log('Error getting name!'))
+      })
+      .catch(err => console.log(err))
     } else {
-        console.log('Web3 is loading...')
+      console.log('Waiting on state to load!')
     }
   }
-  getTransaction = (tx_id) => {
-    return new Promise((resolve, reject) => {
-      this.state.web3.eth.getTransaction(tx_id, function(err, result){
-        if(err) reject(err);
-        console.log(result);
-        resolve(result);
+  readPassportCountry = () => {
+    if(this.state.web3){
+      passportFactory.setProvider(this.state.web3.currentProvider)
+      passportFactory.deployed()
+      .then(passportFactory => {
+        return passportFactory.getPassportCountry(this.state.account)
+        .then(result=> {
+          console.log('blockchain: ', this.hex2a(result))
+          return this.hex2a(result)
+        })
+        .catch(err => console.log('Error getting name!'))
       })
-    })
+      .catch(err => console.log(err))
+    } else {
+      console.log('Waiting on state to load!')
+    }
   }
-  passportDecoder = tx => {
-    abiDecoder.addABI(passportFactoryAbi);
-    console.log(abiDecoder.decodeMethod(tx.input))
-    return abiDecoder.decodeMethod(tx.input)
+  readPassportNumber = () => {
+    if(this.state.web3){
+      passportFactory.setProvider(this.state.web3.currentProvider)
+      passportFactory.deployed()
+      .then(passportFactory => {
+        return passportFactory.getPassportNumber(this.state.account)
+        .then(result=> {
+          console.log('blockchain: ', this.hex2a(result))
+          return this.hex2a(result)
+        })
+        .catch(err => console.log('Error getting name!'))
+      })
+      .catch(err => console.log(err))
+    } else {
+      console.log('Waiting on state to load!')
+    }
   }
-  readTravelEntryCreationTransaction = (tx_id) => {
-    abiDecoder.addABI(travelEntryFactoryAbi)
-    getWeb3
-    .then(results => {
-      results.web3.eth.getTransaction(tx_id, function(err, result){
-        if (err) console.log('Error reading the blockchain')
-        return result
-      })      
-    })
+  readPassportBirthday = () => {
+    if(this.state.web3){
+      passportFactory.setProvider(this.state.web3.currentProvider)
+      passportFactory.deployed()
+      .then(passportFactory => {
+        return passportFactory.getPassportBirthday(this.state.account)
+        .then(result=> {
+          console.log('blockchain: ', this.hex2a(result))
+          return this.hex2a(result)
+        })
+        .catch(err => console.log('Error getting name!'))
+      })
+      .catch(err => console.log(err))
+    } else {
+      console.log('Waiting on state to load!')
+    }
   }
+  readPassportGender = () => {
+    if(this.state.web3){
+      passportFactory.setProvider(this.state.web3.currentProvider)
+      passportFactory.deployed()
+      .then(passportFactory => {
+        return passportFactory.getPassportGender(this.state.account)
+        .then(result=> {
+          console.log('blockchain: ', this.hex2a(result))
+          return this.hex2a(result)
+        })
+        .catch(err => console.log('Error getting name!'))
+      })
+      .catch(err => console.log(err))
+    } else {
+      console.log('Waiting on state to load!')
+    }
+  }
+  readPassportOrigin = () => {
+    if(this.state.web3){
+      passportFactory.setProvider(this.state.web3.currentProvider)
+      passportFactory.deployed()
+      .then(passportFactory => {
+        return passportFactory.getPassportOrigin(this.state.account)
+        .then(result=> {
+          console.log('blockchain: ', this.hex2a(result))
+          return this.hex2a(result)
+        })
+        .catch(err => console.log('Error getting name!'))
+      })
+      .catch(err => console.log(err))
+    } else {
+      console.log('Waiting on state to load!')
+    }
+  }
+  readPassportIssuer = () => {
+    if(this.state.web3){
+      passportFactory.setProvider(this.state.web3.currentProvider)
+      passportFactory.deployed()
+      .then(passportFactory => {
+        return passportFactory.getPassportIssuer(this.state.account)
+        .then(result=> {
+          console.log('blockchain: ', this.hex2a(result))
+          return this.hex2a(result)
+        })
+        .catch(err => console.log('Error getting name!'))
+      })
+      .catch(err => console.log(err))
+    } else {
+      console.log('Waiting on state to load!')
+    }
+  }
+
+  readLastTravelLocation = () => {
+    if(this.state.web3){
+      passportFactory.setProvider(this.state.web3.currentProvider)
+      travelEntryFactory.setProvider(this.state.web3.currentProvider)
+      passportFactory.deployed()
+      .then(passportFactory => {
+        return passportFactory.getPassportNumber(this.state.account)
+        .then(result=> {
+          // console.log('blockchain: ', this.hex2a(result))
+          console.log(this.hex2a(result))
+          travelEntryFactory.getLastTravelLocation(this.hex2a(result))
+          .then(location => console.log(location))
+          .catch(err => console.log(err))
+          // return this.hex2a(result)
+        })
+        .catch(err => console.log('Error getting name!'))
+      })
+      .catch(err => console.log(err))
+    } else {
+      console.log('Waiting on state to load!')
+    }
+  }
+
+
+
+
+
+
+  
+   hex2a(hexString) {
+    var hex = hexString.toString(); 
+    var str = '';
+    for (var i = 0; (i < hex.length && hex.substr(i, 2) !== '00'); i += 2)
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+    return str;
+}
   render() {
     const { isLoaded, web3, account } = this.state;
-    console.log(this.readPassportCreationTransaction('0xb3aa23a2892ccd01f343dad097346aee271bbbdff61e104b291dd9ced021509b'))
     return (
       <div className="App container">
         <Navbar fluid collapseOnSelect>
@@ -163,6 +305,7 @@ class App extends Component {
               <NavItem href="/registration">Register</NavItem>
               <NavItem href="/scan">Welcome</NavItem>
               <NavItem href="/entrypage">Travel!</NavItem>
+              <NavItem href="/summary">Passport</NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -183,8 +326,16 @@ class App extends Component {
             <Route
               render={props =>  (
                 <SummaryPage {...props} 
-                  readPassportCreationTransaction={this.readPassportCreationTransaction}
+                  // readPassport={this.readPassport}
                   isLoaded={this.state.isLoaded}
+                  readPassportName={this.readPassportName}
+                  readPassportCountry={this.readPassportCountry}
+                  readPassportNumber={this.readPassportNumber}
+                  readPassportBirthday={this.readPassportBirthday}
+                  readPassportGender={this.readPassportGender}
+                  readPassportOrigin={this.readPassportOrigin}
+                  readPassportIssuer={this.readPassportIssuer}
+                  readLastTravelLocation={this.readLastTravelLocation}
                 />
               )}
               path="/summary" 

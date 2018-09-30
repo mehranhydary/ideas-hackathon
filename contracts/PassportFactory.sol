@@ -25,4 +25,25 @@ contract PassportFactory {
         Passport memory passport = Passport(_name, _country, _passportNumber, _birthday, _gender, _placeOfBirth, _issuingAuth, msg.sender);
         passports[msg.sender] = passport;
     }
+    function getPassportName(address _person) constant public returns (bytes32) {
+        return passports[_person].name;
+    }
+    function getPassportCountry(address _person) constant public returns (bytes32) {
+        return passports[_person].country;
+    }    
+    function getPassportNumber(address _person) constant public returns (bytes32) {
+        return passports[_person].passportNumber;
+    }        
+    function getPassportBirthday(address _person) constant public returns (uint256) {
+        return passports[_person].birthday;
+    }   
+    function getPassportGender(address _person) constant public returns (bytes32) {
+        return passports[_person].gender;
+    }                
+    function getPassportOrigin(address _person) constant public returns (bytes32) {
+        return passports[_person].placeOfBirth;
+    }                    
+    function getPassportIssuer(address _person) constant public returns (bytes32) {
+        return passports[_person].issuingAuth;
+    }                    
 }

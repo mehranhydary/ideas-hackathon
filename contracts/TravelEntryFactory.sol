@@ -24,4 +24,7 @@ contract TravelEntryFactory is PassportFactory {
         address _traveller) public {
         travels[passports[_traveller].passportNumber][travels[passports[_traveller].passportNumber].length - 1].exitDate = _exitDate;
     }
+    function getLastTravelLocation(bytes32 _passportNumber) view public returns (bytes32) {
+        return travels[_passportNumber][travels[_passportNumber].length - 1].location;
+    }
 }
