@@ -35,6 +35,8 @@
     "raf": "3.4.0",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.4",
+    "react-bootstrap-date-picker": "^5.1.0",
+    "react-datepicker": "^1.6.0",
     "react-dev-utils": "^5.0.2",
     "react-dom": "^16.5.2",
     "react-particles-js": "^2.3.0",
