@@ -57,6 +57,37 @@ class App extends Component {
       )
     })
   }
+  createPassportOnBlockchain(
+    name,
+    country,
+    passportNumber,
+    birthday,
+    gender,
+    placeOfBirth,
+    issuingAuth
+  ) {
+    const contract = require('truffle-contract');
+    const passportFactory = contract(PassportFactory);
+    passportFactory.setProvider(this.state.web3.currentProvider);
+    passportFactory
+    .deployed()
+    .then(passportFactory => {
+      return passportFactory.createPassport(
+        name,
+        country,
+        passportNumber,
+        birthday,
+        gender,
+        placeOfBirth,
+        issuingAuth
+        ,
+        {
+          from: this.state.account,
+          gas: 500000
+        }
+      )
+    })
+  }
   render() {
     return (
       <div className="App container">
