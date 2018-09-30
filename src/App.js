@@ -57,6 +57,46 @@ class App extends Component {
       )
     })
   }
+  createTravelEntryOnBlockchain(
+    location,
+    entryDate
+  ) {
+    const contract = require('truffle-contract');
+    const travelEntryFactory = contract(TravelEntryFactory);
+    travelEntryFactory.setProvider(this.state.web3.currentProvider);
+    travelEntryFactory
+    .deployed()
+    .then(travelEntryFactory => {
+      return travelEntryFactory.createTravelHistory(
+        location,
+        entryDate,
+        this.state.account,
+        {
+          from: this.state.account,
+          gas: 500000
+        }
+      )
+    })
+  }
+  updateTravelEntryOnBlockchain(
+    exitDate
+  ) {
+    const contract = require('truffle-contract');
+    const travelEntryFactory = contract(TravelEntryFactory);
+    travelEntryFactory.setProvider(this.state.web3.currentProvider);
+    travelEntryFactory
+    .deployed()
+    .then(travelEntryFactory => {
+      return travelEntryFactory.updateTravelHistory(
+        exitDate,
+        this.state.account,
+        {
+          from: this.state.account,
+          gas: 500000
+        }
+      )
+    })
+  }
   render() {
     return (
       <div className="App container">
