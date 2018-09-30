@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {FormGroup, ControlLabel, FormControl, HelpBlock, Button } from "react-bootstrap";
-import Particles from 'react-particles-js';
 
 export default class RegistrationPage extends Component {
 
@@ -24,6 +23,13 @@ export default class RegistrationPage extends Component {
   handleChange(e) {
     this.setState({ value: e.target.value });
   }
+
+  handleFormSubmit = (e) => {
+
+    e.preventDefault()
+    this.props.createPassportOnBlockchain(this.state.name, this.state.country, this.state.passportNumber, this.state.birthday, this.state.gender, this.state.placeOfBirth, this.state.issuingAuth);
+  }
+
 
   render() {
     return (
@@ -103,7 +109,7 @@ export default class RegistrationPage extends Component {
             />
             <FormControl.Feedback />
 
-            <Button type="submit">Submit</Button>
+            <Button type="submit" onClick={this.handleFormSubmit} >Submit</Button>
 
           </FormGroup>
         </form>
