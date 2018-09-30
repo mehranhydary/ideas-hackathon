@@ -25,9 +25,16 @@ export default class RegistrationPage extends Component {
   }
 
   handleFormSubmit = (e) => {
-
     e.preventDefault()
-    this.props.createPassportOnBlockchain(this.state.name, this.state.country, this.state.passportNumber, this.state.birthday, this.state.gender, this.state.placeOfBirth, this.state.issuingAuth);
+    this.props.createPassportOnBlockchain(
+      this.state.name, 
+      this.state.country, 
+      this.state.passportNumber, 
+      this.state.birthday, 
+      this.state.gender, 
+      this.state.placeOfBirth, 
+      this.state.issuingAuth
+      );
   }
 
 
