@@ -8,7 +8,8 @@ export default class TravelEntryPage extends Component {
     state = {
         location: '',
         entryDate: '',
-        exitDate: ''
+        exitDate: '',
+        stamped: false
     }
 
     handleChange = (e) => {
@@ -28,12 +29,18 @@ export default class TravelEntryPage extends Component {
           exitDate: date
         });
     }
+
+    handleClick = () => {
+        this.setState({ stamped: true });        
+    }
+    
     
     onSubmit = (e) => {
         console.log('submit')
     }
     
     render() {
+        const { stamped } = this.state;
         return (  
         <div>
             <form>
@@ -78,6 +85,7 @@ export default class TravelEntryPage extends Component {
                         <th>Entry Date</th>
                         <th>Exit Date</th>
                         <th>Issuing Authority</th>
+                        <th>Digital Stamp</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -87,6 +95,15 @@ export default class TravelEntryPage extends Component {
                         <td>Otto</td>
                         <td>@mdo</td>
                         <td>@mdo</td>
+                        <td>
+                            <Button
+                                bsStyle="primary"
+                                disabled={this.state.stamped}
+                                onClick={!this.state.stamped ? this.handleClick : null}
+                            >
+                                {stamped ? 'Stamped' : 'Stamp'}
+                            </Button>
+                        </td>
                     </tr>
                 </tbody>
             </Table>
