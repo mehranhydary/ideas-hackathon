@@ -19,3 +19,15 @@
 .RegistrationPage .lander p {
   color: #999;
 }
+
+.image {
+  text-align: center; 
+}
+
+#location {
+  width: 50%;
+  margin-bottom: 20px;
+}
+.table {
+  margin-top: 20px;
+}
